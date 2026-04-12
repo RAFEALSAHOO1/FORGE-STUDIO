@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, useInView } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 
@@ -188,18 +189,21 @@ const SERVICE_CARDS = [
     tag: 'Strategy',
     title: 'Research & Insight',
     description: 'We dig deep into data, culture, and human behavior to surface the insights that drive meaningful, lasting change.',
+    href: '/browse?category=research',
   },
   {
     video: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260324_151826_c7218672-6e92-402c-9e45-f1e0f454bdc4.mp4',
     tag: 'Craft',
     title: 'Design & Execution',
     description: 'From concept to launch, we obsess over every detail to deliver experiences that feel effortless and look extraordinary.',
+    href: '/forge',
   },
 ]
 
 export function ServicesSection() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
+  const router = useRouter()
 
   return (
     <section className="bg-black py-28 md:py-40 px-6 overflow-hidden relative">
@@ -228,6 +232,7 @@ export function ServicesSection() {
               key={card.title}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: i * 0.15 }}
+              onClick={() => router.push(card.href)}
               className="water-morph rounded-3xl overflow-hidden group cursor-pointer transition-all hover:shadow-2xl"
             >
               {/* Video */}

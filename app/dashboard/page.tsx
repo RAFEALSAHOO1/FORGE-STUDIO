@@ -216,8 +216,8 @@ export default function DashboardPage() {
               <h2 className="text-white text-lg font-medium mb-4">Quick Actions</h2>
               <div className="flex flex-col gap-2.5">
                 <Link href="/forge">
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-3 liquid-glass rounded-2xl p-4 cursor-pointer hover:bg-white/5 transition-colors group">
+                  <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                    className="w-full flex items-center gap-3 liquid-glass rounded-2xl p-4 cursor-pointer hover:bg-white/5 transition-colors group text-left border-0 bg-transparent">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#89AACC] to-[#4E85BF] flex items-center justify-center flex-shrink-0">
                       <Plus size={18} className="text-white" />
                     </div>
@@ -226,7 +226,7 @@ export default function DashboardPage() {
                       <p className="text-white/35 text-xs">Open The Forge</p>
                     </div>
                     <ArrowRight size={14} className="text-white/15 ml-auto group-hover:text-white/40 transition-colors" />
-                  </motion.div>
+                  </motion.button>
                 </Link>
 
                 {QUICK.map(qa => (

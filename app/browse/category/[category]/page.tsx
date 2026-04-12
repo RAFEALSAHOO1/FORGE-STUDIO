@@ -8,10 +8,6 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { CATEGORIES, PRODUCTS, getCategoryById, getProductsByCategory } from '@/lib/products'
 
-export function generateStaticParams() {
-  return CATEGORIES.map(c => ({ category: c.id }))
-}
-
 export default function CategoryPage({ params }: { params: { category: string } }) {
   const category = getCategoryById(params.category)
   const products = useMemo(() => getProductsByCategory(params.category), [params.category])
