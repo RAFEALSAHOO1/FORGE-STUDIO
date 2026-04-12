@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect, useMemo } from 'react'
+import { useState, useCallback, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { RotateCcw, Sliders, Type, Palette, AlignLeft, SlidersHorizontal, Layers, Check } from 'lucide-react'
@@ -148,7 +148,7 @@ function VirtualFontList({ fonts, selected, onSelect }: VirtualFontListProps) {
 }
 
 // ─── Main Forge Page ──────────────────────────────────────────────────────────
-function ForgePageInner() {
+function ForgePageInner(): import("react").JSX.Element {
   const router      = useRouter()
   const qp          = useSearchParams()
   const [product, setProduct]         = useState(PRODUCT_STRIP[0])

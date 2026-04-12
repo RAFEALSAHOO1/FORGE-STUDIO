@@ -49,7 +49,7 @@ export default function GlobalError({
             Unexpected Error
           </h1>
           <p className="text-white/40 text-base leading-relaxed mb-3">
-            Something broke on our end. Don't worry — your work is safe. Our team has been notified.
+            Something broke on our end. Don&apos;t worry — your work is safe. Our team has been notified.
           </p>
           {error?.message && (
             <p className="text-red-400/60 text-sm font-mono bg-red-500/5 rounded-xl px-4 py-2 inline-block">

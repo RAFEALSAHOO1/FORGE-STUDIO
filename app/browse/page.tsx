@@ -260,7 +260,7 @@ export default function BrowsePage() {
               </button>
             </div>
             {query && (
-              <p className="text-white/30 text-xs mt-2 ml-1">{filteredProducts.length} results for "{query}"</p>
+              <p className="text-white/30 text-xs mt-2 ml-1">{filteredProducts.length} results for &ldquo;{query}&rdquo;</p>
             )}
           </div>
         </motion.div>

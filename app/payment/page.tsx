@@ -84,9 +84,12 @@ function PaymentContent() {
   const total    = Math.round(TOT_USD * rate * 100) / 100
 
   useEffect(() => {
-    if (currency === 'INR' && !['upi','netbanking','wallet'].includes(method)) setMethod('upi')
-    if (currency !== 'INR' && ['upi','netbanking','wallet'].includes(method))  setMethod('card')
-  }, [currency])
+    if (currency === 'INR' && !['upi','netbanking','wallet'].includes(method)) {
+      setMethod('upi')
+    } else if (currency !== 'INR' && ['upi','netbanking','wallet'].includes(method)) {
+      setMethod('card')
+    }
+  }, [currency]) // method is not needed in deps to avoid loop
 
   const fmtNum = (v:string)=>v.replace(/\D/g,'').slice(0,16).replace(/(.{4})/g,'$1 ').trim()
   const fmtExp = (v:string)=>v.replace(/\D/g,'').slice(0,4).replace(/^(\d{2})/,'$1/')

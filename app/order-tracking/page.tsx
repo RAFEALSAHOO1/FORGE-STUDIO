@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, Download, RefreshCw, ArrowLeft, Loader2 } from 'lucide-react'
 import Link from 'next/link'
@@ -13,6 +13,7 @@ const SAMPLE_ORDERS = [
   { id: 'ORD-001', service: 'Wedding Invitation Suite', status: 'progress' as const, date: 'Apr 3, 2025', thumb: '💌', designer: 'Priya M.', amount: '$39' },
   { id: 'ORD-002', service: 'Brand Identity Package',   status: 'pending'  as const, date: 'Apr 5, 2025', thumb: '🎨', designer: 'Alex R.',  amount: '$149' },
   { id: 'ORD-003', service: 'Instagram Story Templates',status: 'completed'as const, date: 'Mar 28, 2025',thumb: '📱', designer: 'Jordan C.',amount: '$49' },
+  { id: 'ORD-004', service: 'Logo Design',             status: 'cancelled'as const, date: 'Mar 20, 2025',thumb: '🔷', designer: 'Sam T.',   amount: '$29' },
 ]
 
 const STATUS_STYLE: Record<string, { bg: string; text: string; label: string }> = {
@@ -29,7 +30,7 @@ export default function OrderTrackingPage() {
   const [loading, setLoading]     = useState(true)
   const [refreshing, setRefreshing] = useState(false)
 
-  const fetchOrders = async (showSpinner = false) => {
+  const fetchOrders = useCallback(async (showSpinner = false) => {
     if (showSpinner) setRefreshing(true)
     try {
       const userId = user?.id || 'user-1'
@@ -52,11 +53,11 @@ export default function OrderTrackingPage() {
       setLoading(false)
       setRefreshing(false)
     }
-  }
+  }, [user?.id])
 
-  useEffect(() => { fetchOrders() }, [user?.id])
+  useEffect(() => { fetchOrders() }, [fetchOrders])
 
-  const steps = defaultOrderSteps(active.status)
+  const steps = active.status === 'cancelled' ? [] : defaultOrderSteps(active.status as 'pending' | 'progress' | 'completed')
 
   return (
     <div className="min-h-screen bg-black">

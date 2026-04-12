@@ -104,7 +104,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="liquid-glass rounded-3xl p-7"
             >
-              <h3 className="text-white font-medium mb-5">What's included</h3>
+              <h3 className="text-white font-medium mb-5">What&apos;s included</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {[
                   `Custom ${product.name} design`,
