@@ -1,4 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { ensureDBInitialized } from './lib/db-init'
+
+// Track if database has been initialized for this process
+let dbInitializeAttempted = false
 
 // Simple in-memory rate limiter for middleware
 const ipMap = new Map<string, { count: number; ts: number }>()
@@ -18,6 +22,15 @@ function checkRateLimit(ip: string, limit = 200, windowMs = 60_000): boolean {
 export function middleware(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? '127.0.0.1'
   const { pathname } = req.nextUrl
+
+  // Initialize database once on first middleware execution
+  if (!dbInitializeAttempted) {
+    dbInitializeAttempted = true
+    // Non-blocking initialization - doesn't delay response
+    ensureDBInitialized().catch(err => {
+      console.error('Database initialization failed in middleware:', err)
+    })
+  }
 
   // Rate limit API routes more aggressively
   const isApi = pathname.startsWith('/api/')

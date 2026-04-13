@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
       RETURNING *
     `
 
-    const createdDesign = result[0]
+    const createdDesign = (result as any[])[0]
 
     return apiSuccess({ design: createdDesign }, 201)
   } catch (error) {
@@ -98,7 +98,7 @@ export async function GET(req: NextRequest) {
     const countResult = await sql`
       SELECT COUNT(*) as total FROM designs ${whereClause}
     `
-    const total = Number(countResult[0].total)
+    const total = Number((countResult as any[])[0].total)
 
     // Get paginated results
     const designs = await sql`
